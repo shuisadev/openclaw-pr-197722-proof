@@ -1,0 +1,12 @@
+$ node source-manifest.mjs plan --current run/bad.manifest.jsonl    # base: main fc6c25e9
+exit 1
+Expected property name or '}' in JSON at position 1 (line 1 column 2)
+$ node source-manifest.mjs plan --current run/bad.manifest.jsonl    # head: 58dd44207fa
+exit 1
+run/bad.manifest.jsonl:3: line is not valid JSON
+$ printf '\n\n{bad "PRIVATE_LEAK_MARKER_9f3c" json}\n' | node source-manifest.mjs snapshot --input - ...   # base
+exit 1
+Expected property name or '}' in JSON at position 1 (line 1 column 2)
+$ printf '\n\n{bad "PRIVATE_LEAK_MARKER_9f3c" json}\n' | node source-manifest.mjs snapshot --input - ...   # head
+exit 1
+-:3: line is not valid JSON
